@@ -1,8 +1,6 @@
 import React from 'react';
 
-const UserItem = (props) => {
-
-  const { login, avatar_url, url } = props.user; // destructure & remove this.state below
+const UserItem = ({ user: { login, avatar_url, url } }) => {
   return (
     <div className='card text-center'>
       <img
