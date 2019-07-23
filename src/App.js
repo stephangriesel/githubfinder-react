@@ -5,9 +5,14 @@ import Users from './Components/Users/Users';
 import axios from 'axios';
 
 class App extends Component {
+  state = {
+    users: [],
+    loading: false
+  }
   async componentDidMount() {
+    this.setState({ loading: true });
     const res = await axios.get('https://api.github.com/users');
-
+    this.setState({ users: res.data, loading: false })
     console.log(res.data);
   }
   render() {
@@ -15,7 +20,7 @@ class App extends Component {
       <div>
         <Navbar />
         <div className="container">
-          <Users />
+          <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
     );
