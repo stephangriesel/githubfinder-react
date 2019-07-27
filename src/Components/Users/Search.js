@@ -8,7 +8,7 @@ export class Search extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.searchUsers(this.state.text);
+        this.props.searchUsers(this.state.text); {/* Send props to search component */ }
         this.setState({ text: '' });
     }
 
@@ -19,7 +19,7 @@ export class Search extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.onSubmit} className="form">
+                <form onSubmit={this.onSubmit} className="form"> {/* Call function to submit form data */}
                     <input
                         type="text"
                         name="text"
