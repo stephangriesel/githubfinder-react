@@ -7,8 +7,8 @@ const Navbar = ({ icon, title }) => {
       <h1>
         <i className={icon} />
         {title}
-        Navbar
-        </h1>
+
+      </h1>
     </nav>
   );
 }

@@ -44,10 +44,13 @@ class App extends Component {
       <div>
         <Navbar />
         <div className="container">
+          {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
+          {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
+          {/* get number of users in array, if greater than 0 set to true, else false   */}
           <Search
-            searchUsers={this.searchUsers} {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
-            clearUsers={this.clearUsers} {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
-            showClear={this.state.users.length > 0 ? true : false} {/* get number of users in array, if greater than 0 set to true, else false   */ }
+            searchUsers={this.searchUsers}
+            clearUsers={this.clearUsers}
+            showClear={this.state.users.length > 0 ? true : false}
           />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
