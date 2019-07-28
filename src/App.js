@@ -34,13 +34,17 @@ class App extends Component {
     );
 
     this.setState({ users: res.data.items, loading: false })
-  }
+  };
+
+  // Clear users 
+  clearUsers = () => this.setState({ users: [], loading: false })
+
   render() {
     return (
       <div>
         <Navbar />
         <div className="container">
-          <Search searchUsers={this.searchUsers} /> {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
+          <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} /> {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
