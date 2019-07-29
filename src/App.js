@@ -4,11 +4,13 @@ import Navbar from './Components/Layout/Navbar';
 import Users from './Components/Users/Users';
 import Search from './Components/Users/Search';
 import axios from 'axios';
+import { sign } from 'crypto';
 
 class App extends Component {
   state = {
     users: [],
-    loading: false
+    loading: false,
+    alert: null
   }
   // async componentDidMount() {
   //   console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
@@ -39,6 +41,11 @@ class App extends Component {
   // Clear users 
   clearUsers = () => this.setState({ users: [], loading: false });
 
+  // Form validation
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg: msg, type: type } });
+  }
+
   render() {
     const { users, loading } = this.state;
     return (
@@ -52,6 +59,7 @@ class App extends Component {
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
           />
           <Users loading={loading} users={users} />
         </div>
