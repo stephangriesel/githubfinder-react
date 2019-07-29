@@ -44,7 +44,8 @@ class App extends Component {
   // Form validation
   setAlert = (msg, type) => {
     this.setState({ alert: { msg: msg, type: type } });
-  }
+    setTimeout(() => this.setState({ alert: null }), 3000)
+  };
 
   render() {
     const { users, loading } = this.state;
