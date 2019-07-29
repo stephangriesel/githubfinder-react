@@ -3,8 +3,8 @@ import './App.css';
 import Navbar from './Components/Layout/Navbar';
 import Users from './Components/Users/Users';
 import Search from './Components/Users/Search';
+import Alert from './Components/Layout/Alert';
 import axios from 'axios';
-import { sign } from 'crypto';
 
 class App extends Component {
   state = {
@@ -52,6 +52,7 @@ class App extends Component {
       <div>
         <Navbar />
         <div className="container">
+          <Alert alert={this.state.alert} />
           {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
           {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
           {/* get number of users in array, if greater than 0 set to true, else false   */}
