@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './Components/Layout/Navbar';
 import Users from './Components/Users/Users';
 import Search from './Components/Users/Search';
 import Alert from './Components/Layout/Alert';
 import axios from 'axios';
+
 
 class App extends Component {
   state = {
@@ -50,24 +52,34 @@ class App extends Component {
   render() {
     const { users, loading } = this.state;
     return (
-      <div>
-        <Navbar />
-        <div className="container">
-          <Alert alert={this.state.alert} />
-          {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
-          {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
-          {/* get number of users in array, if greater than 0 set to true, else false   */}
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={this.state.alert} />
+            <Switch>
+              <Route exact path='/' render={props => (
+                <Fragment>
+                  {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
+                  {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
+                  {/* get number of users in array, if greater than 0 set to true, else false   */}
+                  <Search
+                    searchUsers={this.searchUsers}
+                    clearUsers={this.clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={this.setAlert}
+                  />
+                  <Users loading={loading} users={users} />
+                </Fragment>
+              )} />
+            </Switch>
+
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
 
 export default App;
+
