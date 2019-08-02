@@ -58,7 +58,7 @@ export class User extends Component {
                         <h1>{name}</h1>
                         <p>{location}</p>
                     </div>
-                    <div>
+                    <div className="text-center">
                         {bio && (
                             <Fragment>
                                 <h3>Bio</h3>
