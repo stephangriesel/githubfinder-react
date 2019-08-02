@@ -89,9 +89,9 @@ class App extends Component {
                 </Fragment>
               )} />
               <Route exact path="/about" component={About} />
-              <Route exact path="/user/:login" render={props => (props => (
+              <Route exact path="/user/:login" render={props => (
                 <User {...props} getUser={this.getUser} user={user} loading={loading} />
-              ))} />
+              )} />
             </Switch>
 
           </div>
