@@ -34,18 +34,6 @@ const App = () => {
   // }
 
   // Search Users
-  const searchUsers = async (text) => {
-    setLoading(true);
-
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${
-      process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-
-    setUsers(res.data.items);
-    setLoading(false);
-  };
 
   // Get  user 
   const getUser = async (username) => {
@@ -104,7 +92,6 @@ const App = () => {
                   {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
                   {/* get number of users in array, if greater than 0 set to true, else false   */}
                   <Search
-                    searchUsers={searchUsers}
                     clearUsers={clearUsers}
                     showClear={users.length > 0 ? true : false}
                     setAlert={validateForm}
