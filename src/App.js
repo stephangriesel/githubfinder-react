@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
 import Navbar from './Components/Layout/Navbar';
 import Users from './Components/Users/Users';
 import User from './Components/Users/User';
@@ -8,6 +7,9 @@ import Search from './Components/Users/Search';
 import About from './Components/Pages/About';
 import Alert from './Components/Layout/Alert';
 import axios from 'axios';
+
+import './App.css';
+import GithubState from './context/github/GithubState';
 
 
 const App = () => {
@@ -89,40 +91,42 @@ const App = () => {
 
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={alert} />
-          <Switch>
-            <Route exact path='/' render={props => (
-              <Fragment>
-                {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
-                {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
-                {/* get number of users in array, if greater than 0 set to true, else false   */}
-                <Search
-                  searchUsers={searchUsers}
-                  clearUsers={clearUsers}
-                  showClear={users.length > 0 ? true : false}
-                  setAlert={validateForm}
-                />
-                <Users loading={loading} users={users} />
-              </Fragment>
-            )} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/user/:login" render={props => (
-              <User {...props}
-                getUser={getUser}
-                getUserRepos={getUserRepos}
-                user={user}
-                repos={repos}
-                loading={loading} />
-            )} />
-          </Switch>
+    <GithubState>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={alert} />
+            <Switch>
+              <Route exact path='/' render={props => (
+                <Fragment>
+                  {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
+                  {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
+                  {/* get number of users in array, if greater than 0 set to true, else false   */}
+                  <Search
+                    searchUsers={searchUsers}
+                    clearUsers={clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={validateForm}
+                  />
+                  <Users loading={loading} users={users} />
+                </Fragment>
+              )} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/user/:login" render={props => (
+                <User {...props}
+                  getUser={getUser}
+                  getUserRepos={getUserRepos}
+                  user={user}
+                  repos={repos}
+                  loading={loading} />
+              )} />
+            </Switch>
 
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GithubState>
   );
 }
 
