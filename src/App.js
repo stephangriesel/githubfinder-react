@@ -6,15 +6,12 @@ import User from './Components/Users/User';
 import Search from './Components/Users/Search';
 import About from './Components/Pages/About';
 import Alert from './Components/Layout/Alert';
-import axios from 'axios';
 
 import './App.css';
 import GithubState from './context/github/GithubState';
 
 
 const App = () => {
-  const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
   // async componentDidMount() {
@@ -30,26 +27,6 @@ const App = () => {
   //   this.setState({ users: res.data, loading: false })
   //   console.log(res.data);
   // }
-
-  // Search Users
-
-  // Get  user 
-
-
-  // Get users repository
-  const getUserRepos = async (username) => {
-    setLoading(true);
-
-    const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${
-      process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-
-    setRepos(res.data);
-    setLoading(false);
-  };
-
 
   // Form validation
   const validateForm = (msg, type) => {
@@ -80,12 +57,7 @@ const App = () => {
                 </Fragment>
               )} />
               <Route exact path="/about" component={About} />
-              <Route exact path="/user/:login" render={props => (
-                <User {...props}
-                  getUserRepos={getUserRepos}
-                  repos={repos}
-                />
-              )} />
+              <Route exact path="/user/:login" component={User} />
             </Switch>
 
           </div>
