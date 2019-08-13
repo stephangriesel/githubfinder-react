@@ -64,12 +64,6 @@ const App = () => {
   };
 
 
-  // Clear users 
-  const clearUsers = () => {
-    setUsers([]);
-    setLoading(false);
-  };
-
   // Form validation
   const validateForm = (msg, type) => {
     setAlert({ msg, type });
@@ -92,8 +86,7 @@ const App = () => {
                   {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
                   {/* get number of users in array, if greater than 0 set to true, else false   */}
                   <Search
-                    clearUsers={clearUsers}
-                    showClear={users.length > 0 ? true : false}
+
                     setAlert={validateForm}
                   />
                   <Users />
