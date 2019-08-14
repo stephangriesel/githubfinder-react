@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ setAlert }) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
   const [text, setText] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
     if (text === '') {
-      setAlert('Please complete field', 'light')
+      alertContext.setAlert('Please complete field', 'light')
     } else {
       githubContext.searchUsers(text); {/* Send props to search component */ }
       setText('')
@@ -39,10 +40,6 @@ const Search = ({ setAlert }) => {
       )} {/* hide clear button if users not showing */}
     </div>
   )
-}
-
-Search.propTypes = {
-  setAlert: PropTypes.func.isRequired
 }
 
 export default Search

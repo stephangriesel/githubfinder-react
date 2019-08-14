@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './Components/Layout/Navbar';
 import Users from './Components/Users/Users';
@@ -9,10 +9,10 @@ import Alert from './Components/Layout/Alert';
 
 import './App.css';
 import GithubState from './context/github/GithubState';
+import AlertState from './context/alert/AlertState';
 
 
 const App = () => {
-  const [alert, setAlert] = useState(null);
 
   // async componentDidMount() {
   //   console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
@@ -29,40 +29,38 @@ const App = () => {
   // }
 
   // Form validation
-  const validateForm = (msg, type) => {
-    setAlert({ msg, type });
 
-    setTimeout(() => setAlert(null), 3000)
-  };
 
 
   return (
     <GithubState>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Alert alert={alert} />
-            <Switch>
-              <Route exact path='/' render={props => (
-                <Fragment>
-                  {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
-                  {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
-                  {/* get number of users in array, if greater than 0 set to true, else false   */}
-                  <Search
+      <AlertState>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className="container">
+              <Alert />
+              <Switch>
+                <Route exact path='/' render={props => (
+                  <Fragment>
+                    {/* get properties from onSubmit function in search component & refers to searchUsers function in this component */}
+                    {/* get properties from clearUsers function, props passed up from search component > clearUsers } */}
+                    {/* get number of users in array, if greater than 0 set to true, else false   */}
+                    <Search
 
-                    setAlert={validateForm}
-                  />
-                  <Users />
-                </Fragment>
-              )} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/user/:login" component={User} />
-            </Switch>
 
+                    />
+                    <Users />
+                  </Fragment>
+                )} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/user/:login" component={User} />
+              </Switch>
+
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertState>
     </GithubState>
   );
 }
